@@ -31,6 +31,10 @@
 	 letter-spacing: 0;
 	 margin-right: 0;
 }
+a{
+	color:	#8f0;
+	text-decoration: none;
+}
  .intro__btn {
 	 cursor: pointer;
 	 background: transparent;
@@ -60,14 +64,13 @@
 
 <section class="intro">
   <div class="intro__text">Relice</div>
-  <button class="intro__btn" type="button">Contact Us</button>
+  <button class="intro__btn" type="button"><a href="mailto: customer_manager@relice.com">Contact Us</button></a>
 </section>
 <script type="text/javascript">
   document.addEventListener("DOMContentLoaded", function() {
   const introText = document.getElementsByClassName('intro__text'),
   introBtn = document.getElementsByClassName('intro__btn');
   
-  introBtn[0].addEventListener('click', () => alert('Hello World!'));
   
   setTimeout(()=> {
     introText[0].classList.add('start');

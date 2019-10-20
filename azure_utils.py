@@ -17,7 +17,7 @@ def get_face_id(image_url):
     params = {
         'returnFaceId': 'true'
     }
-    response_1 = requests.post(face_api_url, params=params,
+    response = requests.post(face_api_url, params=params,
                          headers=headers, json={"url": image_url})
     faceId = response.json()[0]['faceId']
     return faceId
@@ -46,3 +46,4 @@ def face_compare(id_1, id_2):
                              headers=headers,
                              json=body)
     return response.json()
+

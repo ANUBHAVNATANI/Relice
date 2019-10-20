@@ -8,9 +8,9 @@ def get_database(name):
         array of the face ids
     """
     if(name=="temp"):
-        url = "https://hidden-fjord-93998.herokuapp.com/api/get/reports"
+        url = "https://reliceapi.azurewebsites.net/api/get/reports"
     else:
-        url = "https://hidden-fjord-93998.herokuapp.com/api/get/complaints"
+        url = "https://reliceapi.azurewebsites.net/api/get/complaints"
     r = requests.get(url=url)
     data = r.json()
     arr = [data[i]['face_id'] for i in range(len(data))]
@@ -28,7 +28,7 @@ def post_matched_images(face_id1,face_id2,victim_name):
     Returns:
         post_resp : this says if it was succesfull in posting the images
     """
-    url = "https://hidden-fjord-93998.herokuapp.com/api/post/matched"
+    url = "https://reliceapi.azurewebsites.net/api/post/matched"
     data = {
         "complaint_id":face_id1,
         "report_id":face_id2,
