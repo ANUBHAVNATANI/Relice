@@ -41,6 +41,7 @@ def checkImages():
         return jsonify({'trace': traceback.format_exc()})
 
 
+
 @app.route("/checkImagesV2",methods=["GET","POST"])
 def checkImages():
     try:
@@ -53,9 +54,12 @@ def checkImages():
         score = []
         boolArr = []
         for i in a:
-            v = face_compare(i,faceId)
-            score.append(v['confidence'])
-            boolArr.append(v['isIdentical'])
+            try:
+                v = face_compare(i,faceId)
+                score.append(v['confidence'])
+                boolArr.append(v['isIdentical'])
+            except:
+                pass
         extract_max = score.index(max(score))
         if(boolArr[extract_max]==True):
             #call database route to store the array
@@ -82,9 +86,12 @@ def getId():
         boolArr = []
         try:
             for i in a:
-                v = face_compare(i,faceId)
-                score.append(v['confidence'])
-                boolArr.append(v['isIdentical'])
+                try:
+                    v = face_compare(i,faceId)
+                    score.append(v['confidence'])
+                    boolArr.append(v['isIdentical'])
+                except:
+                    pass
             extract_max = score.index(max(score))
             if(boolArr[extract_max]==True):
                 #call database route to store the array
@@ -96,7 +103,6 @@ def getId():
             return jsonify({"face_id":faceId,"matched_id":""})
     except:
         return jsonify({'Feedback': "error"})
-
 
 
 #App running code
