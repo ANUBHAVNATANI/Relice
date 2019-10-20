@@ -46,8 +46,8 @@ def checkImages():
     try:
         #Api of checking for the android cliet
         faceId = request.args.get('faceId')
-        #can be skipped by the inclusion of the vectors time saved - 1s
-        a = []
+        database = get_database('perm')
+        a,name = database[0],database[1] 
         #take face ids from the original database
         #results array
         score = []
@@ -59,10 +59,11 @@ def checkImages():
         extract_max = score.index(max(score))
         if(boolArr[extract_max]==True):
             #call database route to store the array
-            pass
-        else:
-            #else do not call the database route
-            pass
+            r = post_matched_images(a[extract_max],faceId,name[extract_max])
+            if(len(r.json())==1):
+                #error handling 
+                return jsonify({"Feedback": "Error"}) 
+
         #passing this as a api response to the client
         return jsonify({"Feedback":"ThankYou"})
     except:
@@ -75,7 +76,7 @@ def getId():
         #generating the face id
         faceId = get_face_id(dbItemId)
         #get the temp database images using the database route
-        a = []
+        a = get_database("temp")
         #results array
         score = []
         boolArr = []
